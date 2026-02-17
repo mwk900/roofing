@@ -1,0 +1,6 @@
+<svg xmlns='http://www.w3.org/2000/svg' width='800' height='500' viewBox='0 0 800 500'>
+  <rect width='800' height='500' fill='#dbeafe'/>
+  <rect x='80' y='200' width='640' height='220' fill='#60a5fa'/>
+  <polygon points='60,220 400,60 740,220' fill='#1e3a8a'/>
+  <text x='40' y='70' font-size='46' fill='#0f172a' font-family='Arial'>After 1</text>
+</svg>

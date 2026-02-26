@@ -1,4 +1,5 @@
 import type { Metadata } from 'next';
+import EmergencyBar from '@/components/EmergencyBar';
 import ScrollTop from '@/components/scroll-top';
 import './globals.css';
 
@@ -21,6 +22,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="en-GB">
       <body>
         {children}
+        <EmergencyBar />
         <ScrollTop />
       </body>
     </html>

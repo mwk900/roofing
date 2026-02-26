@@ -4,6 +4,7 @@
 
 :root {
   color-scheme: light;
+  --floating-bottom: 20px;
 }
 
 html,
@@ -26,4 +27,14 @@ a {
 
 section {
   scroll-margin-top: 90px;
+}
+
+body.has-emergency-bar main {
+  padding-bottom: 92px;
+}
+
+@media (min-width: 768px) {
+  body.has-emergency-bar main {
+    padding-bottom: 0;
+  }
 }

@@ -1,6 +1,6 @@
 "use client";
 
-import { FormEvent, useMemo, useState } from 'react';
+import { FormEvent, useMemo, useState } from "react";
 
 type FormState = {
   name: string;
@@ -10,91 +10,145 @@ type FormState = {
 };
 
 const initialState: FormState = {
-  name: '',
-  phone: '',
-  postcode: '',
-  message: ''
+  name: "",
+  phone: "",
+  postcode: "",
+  message: ""
 };
 
 export default function ContactForm() {
   const [form, setForm] = useState<FormState>(initialState);
   const [submitted, setSubmitted] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   const compiledMessage = useMemo(
-    () => `Name: ${form.name}\nPhone: ${form.phone}\nPostcode: ${form.postcode}\n\nMessage:\n${form.message}`,
+    () =>
+      `Name: ${form.name}\nPhone: ${form.phone}\nPostcode: ${form.postcode}\n\nMessage:\n${form.message}`,
     [form]
   );
 
   const emailHref = `mailto:hello@northcrestroofing.co.uk?subject=${encodeURIComponent(
-    'Quote request from website demo'
+    "Quote request from website demo"
   )}&body=${encodeURIComponent(compiledMessage)}`;
+
+  const whatsappHref = `https://wa.me/441150000000?text=${encodeURIComponent(compiledMessage)}`;
 
   const onSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
     if (!form.name.trim() || !form.phone.trim() || !form.postcode.trim() || !form.message.trim()) {
-      setError('Please complete all fields before sending.');
+      setError("Please complete all fields before continuing.");
       return;
     }
 
-    setError('');
+    setError("");
     setSubmitted(true);
   };
 
-  return submitted ? (
-    <div className="rounded-xl border border-green-200 bg-green-50 p-6">
-      <h3 className="text-xl font-semibold text-navy">Thanks — your message is ready to send.</h3>
-      <p className="mt-2 text-sm text-slate-700">
-        This demo form is static-export friendly. Use one of the options below to continue.
+  if (submitted) {
+    return (
+      <div className="rounded-2xl border border-emerald-200 bg-emerald-50 p-5 sm:p-6">
+        <h3 className="text-xl font-semibold text-navy">Thanks — your details are ready to send.</h3>
+        <p className="mt-2 text-sm text-slate-700">
+          For this static demo, use one of the actions below to continue your enquiry.
+        </p>
+
+        <div className="mt-4 grid gap-2 sm:grid-cols-2">
+          <a
+            href="tel:01150000000"
+            className="inline-flex min-h-11 items-center justify-center rounded-xl bg-accent px-4 text-sm font-semibold text-white"
+          >
+            Call now
+          </a>
+
+          <a
+            href={emailHref}
+            className="inline-flex min-h-11 items-center justify-center rounded-xl bg-navy px-4 text-sm font-semibold text-white"
+          >
+            Email us
+          </a>
+
+          <a
+            href={whatsappHref}
+            target="_blank"
+            rel="noreferrer"
+            className="inline-flex min-h-11 items-center justify-center rounded-xl border border-slate-300 bg-white px-4 text-sm font-semibold text-navy"
+          >
+            WhatsApp message
+          </a>
+
+          <button
+            type="button"
+            className="inline-flex min-h-11 items-center justify-center rounded-xl border border-slate-300 bg-white px-4 text-sm font-semibold text-navy"
+            onClick={() => navigator.clipboard.writeText(compiledMessage)}
+          >
+            Copy message
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+  return (
+    <form onSubmit={onSubmit} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm sm:p-6">
+      <h3 className="text-lg font-semibold text-navy">Request your free quote</h3>
+      <p className="mt-1 text-sm text-slate-600">
+        Typical response time (demo): within 30–60 minutes during working hours.
       </p>
-      <div className="mt-4 flex flex-wrap gap-3">
-        <button
-          type="button"
-          className="rounded-md border border-slate-300 px-4 py-2 text-sm font-semibold"
-          onClick={() => navigator.clipboard.writeText(compiledMessage)}
-        >
-          Copy message
-        </button>
-        <a href={emailHref} className="rounded-md bg-navy px-4 py-2 text-sm font-semibold text-white">
-          Email us
-        </a>
-        <a href="tel:01150000000" className="rounded-md bg-accent px-4 py-2 text-sm font-semibold text-white">
-          Call now
-        </a>
+
+      <div className="mt-4 grid gap-3">
+        <label className="grid gap-1 text-sm font-medium text-slate-700">
+          Full name
+          <input
+            className="min-h-11 rounded-xl border border-slate-300 px-3"
+            name="name"
+            autoComplete="name"
+            value={form.name}
+            onChange={(event) => setForm({ ...form, name: event.target.value })}
+          />
+        </label>
+
+        <label className="grid gap-1 text-sm font-medium text-slate-700">
+          Phone number
+          <input
+            className="min-h-11 rounded-xl border border-slate-300 px-3"
+            name="phone"
+            type="tel"
+            autoComplete="tel"
+            inputMode="tel"
+            value={form.phone}
+            onChange={(event) => setForm({ ...form, phone: event.target.value })}
+          />
+        </label>
+
+        <label className="grid gap-1 text-sm font-medium text-slate-700">
+          Postcode
+          <input
+            className="min-h-11 rounded-xl border border-slate-300 px-3 uppercase"
+            name="postcode"
+            autoComplete="postal-code"
+            value={form.postcode}
+            onChange={(event) => setForm({ ...form, postcode: event.target.value })}
+          />
+        </label>
+
+        <label className="grid gap-1 text-sm font-medium text-slate-700">
+          What do you need help with?
+          <textarea
+            className="min-h-32 rounded-xl border border-slate-300 px-3 py-2"
+            name="message"
+            value={form.message}
+            onChange={(event) => setForm({ ...form, message: event.target.value })}
+          />
+        </label>
       </div>
-    </div>
-  ) : (
-    <form onSubmit={onSubmit} className="rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
-      <h3 className="text-lg font-semibold text-navy">Request a free quote</h3>
-      <div className="mt-4 grid gap-4">
-        <input
-          className="rounded-md border border-slate-300 px-3 py-2"
-          placeholder="Full name"
-          value={form.name}
-          onChange={(event) => setForm({ ...form, name: event.target.value })}
-        />
-        <input
-          className="rounded-md border border-slate-300 px-3 py-2"
-          placeholder="Phone number"
-          value={form.phone}
-          onChange={(event) => setForm({ ...form, phone: event.target.value })}
-        />
-        <input
-          className="rounded-md border border-slate-300 px-3 py-2"
-          placeholder="Postcode"
-          value={form.postcode}
-          onChange={(event) => setForm({ ...form, postcode: event.target.value })}
-        />
-        <textarea
-          className="min-h-28 rounded-md border border-slate-300 px-3 py-2"
-          placeholder="Tell us what you need help with"
-          value={form.message}
-          onChange={(event) => setForm({ ...form, message: event.target.value })}
-        />
-      </div>
+
       {error ? <p className="mt-3 text-sm text-red-700">{error}</p> : null}
-      <button type="submit" className="mt-4 w-full rounded-md bg-accent px-4 py-3 font-semibold text-white">
+
+      <button
+        type="submit"
+        className="mt-4 inline-flex min-h-11 w-full items-center justify-center rounded-xl bg-accent px-4 text-sm font-semibold text-white"
+      >
         Continue
       </button>
     </form>

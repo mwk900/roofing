@@ -199,7 +199,11 @@ export default function HomePage() {
             <aside className="rounded-2xl border border-white/20 bg-white/10 p-4 shadow-xl">
               <p className="text-sm font-semibold text-orange-200">Emergency-first promise</p>
               <ul className="mt-3 grid gap-2 text-sm text-slate-100">
-                {['Insured domestic roofing work', 'Written quote before work starts', 'Guaranteed workmanship after completion'].map((item) => (
+                {[
+                  'Insured domestic roofing work',
+                  'Written quote before work starts',
+                  'Guaranteed workmanship after completion'
+                ].map((item) => (
                   <li key={item} className="flex items-center gap-2 rounded-lg bg-white/10 px-3 py-2">
                     <span className="text-orange-300">✓</span>
                     <span>{item}</span>
@@ -215,7 +219,10 @@ export default function HomePage() {
       <section id="services" className="mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-14">
         <div className="flex flex-wrap items-end justify-between gap-3">
           <h2 className="text-2xl font-bold text-navy sm:text-3xl">Roofing services built around quick response</h2>
-          <a href="tel:01150000000" className="inline-flex min-h-11 items-center rounded-xl border border-slate-300 px-4 text-sm font-semibold text-navy">
+          <a
+            href="tel:01150000000"
+            className="inline-flex min-h-11 items-center rounded-xl border border-slate-300 px-4 text-sm font-semibold text-navy"
+          >
             Call 0115 000 0000
           </a>
         </div>
@@ -240,7 +247,9 @@ export default function HomePage() {
                   <h3 className="text-base font-semibold text-navy">
                     {project.title} - {project.area}
                   </h3>
-                  <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700">{project.tag}</span>
+                  <span className="rounded-full bg-orange-100 px-3 py-1 text-xs font-semibold text-orange-700">
+                    {project.tag}
+                  </span>
                 </div>
                 <p className="mt-2 text-sm text-slate-700">{project.summary}</p>
                 <div className="mt-3">
@@ -256,9 +265,13 @@ export default function HomePage() {
         <h2 className="text-2xl font-bold text-navy sm:text-3xl">What local homeowners say</h2>
         <div className="mt-5 grid gap-3 md:grid-cols-2 lg:grid-cols-3">
           {reviews.map((review) => (
-            <article key={`${review.name}-${review.area}`} className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
+            <article
+              key={`${review.name}-${review.area}`}
+              className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm"
+            >
               <p className="text-sm text-amber-500" aria-label={`${review.rating} star rating`}>
-                {'★'.repeat(review.rating)}{'☆'.repeat(5 - review.rating)}
+                {'★'.repeat(review.rating)}
+                {'☆'.repeat(5 - review.rating)}
               </p>
               <p className="mt-2 text-sm leading-6 text-slate-700">“{review.text}”</p>
               <p className="mt-3 text-sm font-semibold text-navy">
@@ -275,7 +288,10 @@ export default function HomePage() {
           <p className="mt-2 text-sm text-slate-600">Nottingham and nearby areas within around 20 miles.</p>
           <div className="mt-5 grid gap-2 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5">
             {areas.map((area) => (
-              <p key={area} className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-medium text-slate-700">
+              <p
+                key={area}
+                className="rounded-xl border border-slate-200 bg-slate-50 px-3 py-2 text-sm font-medium text-slate-700"
+              >
                 {area}
               </p>
             ))}
@@ -308,10 +324,16 @@ export default function HomePage() {
               <li>Emergency callouts available</li>
             </ul>
             <div className="mt-5 grid gap-2 sm:grid-cols-2">
-              <a href="tel:01150000000" className="inline-flex min-h-11 items-center justify-center rounded-xl bg-accent px-4 text-sm font-semibold text-white">
+              <a
+                href="tel:01150000000"
+                className="inline-flex min-h-11 items-center justify-center rounded-xl bg-accent px-4 text-sm font-semibold text-white"
+              >
                 Call now
               </a>
-              <a href="mailto:hello@northcrestroofing.co.uk" className="inline-flex min-h-11 items-center justify-center rounded-xl border border-slate-200 px-4 text-sm font-semibold text-white">
+              <a
+                href="mailto:hello@northcrestroofing.co.uk"
+                className="inline-flex min-h-11 items-center justify-center rounded-xl border border-slate-200 px-4 text-sm font-semibold text-white"
+              >
                 Email us
               </a>
             </div>
@@ -322,7 +344,9 @@ export default function HomePage() {
 
       <section className="mx-auto max-w-6xl px-4 py-10 sm:px-6 md:py-14">
         <h2 className="text-2xl font-bold text-navy sm:text-3xl">Find us in Nottingham</h2>
-        <p className="mt-2 text-sm text-slate-700">12 Example Street, Nottingham NG1 1AA. On-street parking is usually available nearby.</p>
+        <p className="mt-2 text-sm text-slate-700">
+          12 Example Street, Nottingham NG1 1AA. On-street parking is usually available nearby.
+        </p>
         <div className="mt-4 overflow-hidden rounded-2xl border border-slate-200 shadow-sm">
           <iframe
             title="Map of Northcrest Roofing Nottingham demo location"

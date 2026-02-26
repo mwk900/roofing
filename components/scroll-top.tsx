@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from "react";
 
 const SCROLL_THRESHOLD = 300;
 
@@ -9,13 +9,14 @@ export default function ScrollTop() {
   const [reducedMotion, setReducedMotion] = useState(false);
 
   useEffect(() => {
-    const mediaQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+
     const onChange = () => setReducedMotion(mediaQuery.matches);
 
     onChange();
-    mediaQuery.addEventListener('change', onChange);
+    mediaQuery.addEventListener("change", onChange);
 
-    return () => mediaQuery.removeEventListener('change', onChange);
+    return () => mediaQuery.removeEventListener("change", onChange);
   }, []);
 
   useEffect(() => {
@@ -27,19 +28,16 @@ export default function ScrollTop() {
     };
 
     const onScroll = () => {
-      if (ticking) {
-        return;
-      }
-
+      if (ticking) return;
       ticking = true;
       window.requestAnimationFrame(updateVisibility);
     };
 
     updateVisibility();
-    window.addEventListener('scroll', onScroll, { passive: true });
+    window.addEventListener("scroll", onScroll, { passive: true });
 
     return () => {
-      window.removeEventListener('scroll', onScroll);
+      window.removeEventListener("scroll", onScroll);
     };
   }, []);
 
@@ -47,14 +45,14 @@ export default function ScrollTop() {
     if (reducedMotion) {
       return {
         opacity: isVisible ? 1 : 0,
-        transform: 'translateY(0px)'
+        transform: "translateY(0px)"
       };
     }
 
     return {
       opacity: isVisible ? 1 : 0,
-      transform: isVisible ? 'translateY(0px)' : 'translateY(12px)',
-      transition: 'opacity 180ms ease, transform 180ms ease'
+      transform: isVisible ? "translateY(0px)" : "translateY(12px)",
+      transition: "opacity 180ms ease, transform 180ms ease"
     };
   }, [isVisible, reducedMotion]);
 
@@ -65,13 +63,13 @@ export default function ScrollTop() {
       onClick={() =>
         window.scrollTo({
           top: 0,
-          behavior: 'smooth'
+          behavior: "smooth"
         })
       }
       className="fixed right-4 z-[60] inline-flex h-12 w-12 items-center justify-center rounded-full border border-slate-200 bg-white text-navy shadow-lg outline-none hover:scale-105 hover:bg-slate-50 focus-visible:ring-2 focus-visible:ring-accent focus-visible:ring-offset-2 disabled:pointer-events-none md:bottom-5 md:right-6"
       style={{
         ...animatedStyle,
-        bottom: 'var(--floating-bottom, 20px)'
+        bottom: "var(--floating-bottom, 20px)"
       }}
       tabIndex={isVisible ? 0 : -1}
       disabled={!isVisible}
